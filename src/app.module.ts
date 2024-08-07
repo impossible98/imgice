@@ -5,16 +5,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { BucketModule } from './bucket/bucket.module';
 
-console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV);
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: {
         development: ['.env.local'],
-        production: ['.env']
-      }[process.env.NODE_ENV || 'production']
+        production: ['.env'],
+      }[process.env.NODE_ENV || 'production'],
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,7 +27,8 @@ console.log(process.env.NODE_ENV)
       autoLoadEntities: true,
       synchronize: true,
     }),
-    UserModule
+    BucketModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

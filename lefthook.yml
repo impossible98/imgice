@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      run: yarn run format
+
+commit-msg:
+  parallel: true
+  commands:
+    commitlint:
+      skip:
+        - merge
+        - rebase
+      run: yarn commitlint --edit "$1"
